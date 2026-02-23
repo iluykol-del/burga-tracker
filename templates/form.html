@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Create Bug Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Create Bug Report</h2>
+
+        <form method="post" action="/submit">
+            <input type="text" name="title" placeholder="Title" required>
+
+            <textarea name="description" placeholder="Description" required></textarea>
+
+            <textarea name="steps" placeholder="Steps to reproduce" required></textarea>
+
+            <textarea name="expected_result" placeholder="Expected result" required></textarea>
+
+            <textarea name="actual_result" placeholder="Actual result" required></textarea>
+
+            <select name="severity">
+                <option>Critical</option>
+                <option>Major</option>
+                <option>Minor</option>
+            </select>
+
+            <select name="priority">
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+            </select>
+
+            <input type="text" name="environment" placeholder="OS, Browser, Device">
+            <input type="text" name="app_version" placeholder="Application version">
+            <input type="text" name="author" placeholder="Author">
+
+            <button type="submit">Create Bug Report</button>
+            <a href="{{ url_for('dashboard') }}" class="button">Go to Dashboard</a>
+            
+        </form>
+    </div>
+</body>
+</html>

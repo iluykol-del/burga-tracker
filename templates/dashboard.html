@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bug Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Bug Dashboard</h2>
+
+    <!-- Кнопки действий -->
+    <p>
+        <a href="{{ url_for('clear_all') }}"
+           onclick="return confirm('Clear all bugs?')"
+           class="button-clear">
+           🧹 Clear Dashboard
+        </a>
+        <a href="/" class="button-add">➕ Add Bug</a>
+    </p>
+
+    <!-- Фильтры -->
+    <form method="get" action="{{ url_for('dashboard') }}">
+        Severity:
+        <select name="severity">
+            <option {% if severity_filter == "All" %}selected{% endif %}>All</option>
+            <option {% if severity_filter == "Critical" %}selected{% endif %}>Critical</option>
+            <option {% if severity_filter == "Major" %}selected{% endif %}>Major</option>
+            <option {% if severity_filter == "Minor" %}selected{% endif %}>Minor</option>
+        </select>
+
+        Priority:
+        <select name="priority">
+            <option {% if priority_filter == "All" %}selected{% endif %}>All</option>
+            <option {% if priority_filter == "High" %}selected{% endif %}>High</option>
+            <option {% if priority_filter == "Medium" %}selected{% endif %}>Medium</option>
+            <option {% if priority_filter == "Low" %}selected{% endif %}>Low</option>
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <!-- Таблица багов -->
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Severity</th>
+            <th>Priority</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        {% for bug in bugs %}
+        <tr>
+            <td>{{ bug[0] }}</td>
+            <td>{{ bug[1] }}</td>
+            <td>{{ bug[3] }}</td>
+            <td>{{ bug[4] }}</td>
+            <td>{{ bug[2] }}</td>
+            <td>
+                <a href="{{ url_for('delete_bug', bug_id=bug[0]) }}"
+                   onclick="return confirm('Delete this bug?')">🗑 Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

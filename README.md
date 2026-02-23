@@ -1,4 +1,4 @@
-🌍 Language: [English](#burga-tracker) | [Русский](#burga-tracker-ru)
+🌍 Language: [English](#-burga-tracker) | [Русский](#-burga-tracker-ru)
 
 # 🐞 Burga Tracker
 
@@ -49,42 +49,39 @@ Bug Reports
 
 (coming soon)
 
-
----
-
-## 💾 После этого — коммит
-
-В **Контроль версий**:
-Сообщение коммита:
-```text
-Update README with project description
-
-
----
-
-# 🐞 Burga Tracker (RU)
+🐞 Burga Tracker (RU)
 
 Веб-приложение для создания баг-репортов с автоматической генерацией HTML-отчётов и визуальной статистикой.
 
-## 📌 Возможности
-- Создание баг-репортов через веб-форму
-- Хранение баг-репортов в базе данных SQLite
-- Генерация HTML-отчёта для каждого бага
-- Просмотр всех багов в виде таблицы (dashboard)
-- Фильтрация по Severity и Priority
-- Статистика и графики
-- Автоматизированные тесты (pytest)
+📌 Возможности
 
-## 🛠 Технологии
-- Python 3.10+
-- Flask
-- SQLite
-- HTML, CSS, Bootstrap
-- Pytest
+Создание баг-репортов через веб-форму
 
-## 🚀 Запуск проекта
+Хранение баг-репортов в базе данных SQLite
 
-```bash
+Генерация HTML-отчёта для каждого бага
+
+Просмотр всех багов в виде таблицы (dashboard)
+
+Фильтрация по Severity и Priority
+
+Статистика и графики
+
+Автоматизированные тесты (pytest)
+
+🛠 Технологии
+
+Python 3.10+
+
+Flask
+
+SQLite
+
+HTML, CSS, Bootstrap
+
+Pytest
+
+🚀 Запуск проекта
 pip install -r requirements.txt
 python app.py
 
@@ -114,8 +111,17 @@ Bug Reports
 
 ---
 
-## 💾 После этого — коммит
+## 💡 Что я исправил
+- ✔ закрыл все ```bash``` блоки  
+- ✔ убрал служебные фразы про коммиты  
+- ✔ сделал нормальные заголовки  
+- ✔ сделал рабочие якоря для Language  
+- ✔ README теперь красиво рендерится на GitHub  
 
-Сообщение коммита:
+---
+
+## 💾 После вставки — коммит
+
+Сообщение:
 ```text
-Add Russian version to README
+Make README bilingual (EN/RU)
