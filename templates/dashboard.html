@@ -17,6 +17,13 @@
         </a>
         <a href="/" class="button-add">➕ Add Bug</a>
     </p>
+        <!-- Кнопка Экспорта -->
+    <p>
+        <a href="{{ url_for('export_bugs') }}"
+        class="button-export">
+        📥 Export All Bugs + Stats
+        </a>
+    </p>
 
     <!-- Фильтры -->
     <form method="get" action="{{ url_for('dashboard') }}">
@@ -47,16 +54,20 @@
             <th>Severity</th>
             <th>Priority</th>
             <th>Description</th>
-            <th>Actions</th>
+            <th>Steps</th>
+            <th>Expected</th>
+            <th>Actual</th>
         </tr>
         {% for bug in bugs %}
         <tr>
-            <td>{{ bug[0] }}</td>
-            <td>{{ bug[1] }}</td>
-            <td>{{ bug[3] }}</td>
-            <td>{{ bug[4] }}</td>
-            <td>{{ bug[2] }}</td>
-            <td>
+            <td>{{ bug[0] }}</td> <!-- ID -->
+            <td>{{ bug[1] }}</td> <!-- Title -->
+            <td>{{ bug[6] }}</td> <!-- Severity -->
+            <td>{{ bug[7] }}</td> <!-- Priority -->
+            <td>{{ bug[2] }}</td> <!-- Description -->
+            <td>{{ bug[3] }}</td> <!-- Steps -->
+            <td>{{ bug[4] }}</td> <!-- Expected -->
+            <td>{{ bug[5] }}</td> <!-- Actual -->
                 <a href="{{ url_for('delete_bug', bug_id=bug[0]) }}"
                    onclick="return confirm('Delete this bug?')">🗑 Delete</a>
             </td>
