@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Bug #{{ bug[0] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Edit Bug #{{ bug[0] }}</h2>
+
+    <form method="post">
+        <input type="text" name="title" value="{{ bug[1] }}" placeholder="Title" required><br>
+        <textarea name="description" placeholder="Description" required>{{ bug[2] }}</textarea><br>
+        <textarea name="steps" placeholder="Steps">{{ bug[3] }}</textarea><br>
+        <textarea name="expected" placeholder="Expected">{{ bug[4] }}</textarea><br>
+        <textarea name="actual" placeholder="Actual">{{ bug[5] }}</textarea><br>
+
+        <select name="severity">
+            <option {% if bug[6]=='Critical' %}selected{% endif %}>Critical</option>
+            <option {% if bug[6]=='Major' %}selected{% endif %}>Major</option>
+            <option {% if bug[6]=='Minor' %}selected{% endif %}>Minor</option>
+        </select>
+
+        <select name="priority">
+            <option {% if bug[7]=='High' %}selected{% endif %}>High</option>
+            <option {% if bug[7]=='Medium' %}selected{% endif %}>Medium</option>
+            <option {% if bug[7]=='Low' %}selected{% endif %}>Low</option>
+        </select><br><br>
+
+        <button type="submit">Save</button>
+        <a href="{{ url_for('dashboard') }}">Cancel</a>
+    </form>
+</body>
+</html>

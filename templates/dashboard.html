@@ -19,10 +19,11 @@
     </p>
         <!-- Кнопка Экспорта -->
     <p>
-        <a href="{{ url_for('export_bugs') }}"
+        <a href="{{ url_for('export') }}"
         class="button-export">
-        📥 Export All Bugs + Stats
+        📥 Export HTML
         </a>
+        <a href="{{ url_for('export_pdf') }}" class="button-export">📥 Export PDF</a>
     </p>
 
     <!-- Фильтры -->
@@ -49,6 +50,7 @@
     <!-- Таблица багов -->
     <table>
         <tr>
+            <th>Action</th>
             <th>ID</th>
             <th>Title</th>
             <th>Severity</th>
@@ -60,6 +62,14 @@
         </tr>
         {% for bug in bugs %}
         <tr>
+            <td>
+                <a href="{{ url_for('delete_bug', bug_id=bug[0]) }}"
+                onclick="return confirm('Delete this bug?')"
+                class="button-delete">🗑</a>
+                
+                <a href="{{ url_for('edit_bug', bug_id=bug[0]) }}"
+                class="button-edit">🖊</a>
+            </td>
             <td>{{ bug[0] }}</td> <!-- ID -->
             <td>{{ bug[1] }}</td> <!-- Title -->
             <td>{{ bug[6] }}</td> <!-- Severity -->
@@ -68,9 +78,6 @@
             <td>{{ bug[3] }}</td> <!-- Steps -->
             <td>{{ bug[4] }}</td> <!-- Expected -->
             <td>{{ bug[5] }}</td> <!-- Actual -->
-                <a href="{{ url_for('delete_bug', bug_id=bug[0]) }}"
-                   onclick="return confirm('Delete this bug?')">🗑 Delete</a>
-            </td>
         </tr>
         {% endfor %}
     </table>
