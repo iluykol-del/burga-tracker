@@ -1,34 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+<meta charset="UTF-8">
+<title>Bug Report</title>
     <meta charset="UTF-8">
     <title>Bug Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>Bug Dashboard</h2>
+<h2>Bug Dashboard</h2>
 
     <!-- Кнопки действий -->
     <p>
-        <a href="{{ url_for('clear_all') }}"
-           onclick="return confirm('Clear all bugs?')"
-           class="button-clear">
-           🧹 Clear Dashboard
-        </a>
-        <a href="/" class="button-add">➕ Add Bug</a>
-    </p>
-        <!-- Кнопка Экспорта -->
-    <p>
-        <a href="{{ url_for('export') }}"
-        class="button-export">
-        📥 Export HTML
-        </a>
-        <a href="{{ url_for('export_pdf') }}" class="button-export">📥 Export PDF</a>
-    </p>
-
+        <div class="top-bar">
+            <a href="{{ url_for('clear_all') }}" class="button-clear">🧹 Clear</a>
+            <a href="/" class="button-add">➕ Add Bug</a>
+            <a href="{{ url_for('export') }}" class="button-export">📥 Export</a>
+        </div>
+    
     <!-- Фильтры -->
-    <form method="get" action="{{ url_for('dashboard') }}">
-        Severity:
+    <form class="filters" method="get" action="{{ url_for('dashboard') }}">
+        Severity:   
         <select name="severity">
             <option {% if severity_filter == "All" %}selected{% endif %}>All</option>
             <option {% if severity_filter == "Critical" %}selected{% endif %}>Critical</option>
@@ -51,14 +43,35 @@
     <table>
         <tr>
             <th>Action</th>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Severity</th>
-            <th>Priority</th>
+            <th>
+            ID
+            <a href="{{ url_for('dashboard', sort_by='id', sort_order=next_order, severity=severity_filter, priority=priority_filter) }}">
+                ↕
+            </a>
+            </th>
+            <th>
+            Title
+            <a href="{{ url_for('dashboard', sort_by='title', sort_order=next_order, severity=severity_filter, priority=priority_filter) }}">
+                ↕
+            </a>
+            </th>
+            <th>
+            Severity
+            <a href="{{ url_for('dashboard', sort_by='severity', sort_order=next_order, severity=severity_filter, priority=priority_filter) }}">
+                ↕
+            </a>
+            </th>
+            <th>
+            Priority
+            <a href="{{ url_for('dashboard', sort_by='priority', sort_order=next_order, severity=severity_filter, priority=priority_filter) }}">
+                ↕
+            </a>
+            </th>
             <th>Description</th>
             <th>Steps</th>
             <th>Expected</th>
             <th>Actual</th>
+            <th>Attachment</th>
         </tr>
         {% for bug in bugs %}
         <tr>
@@ -78,8 +91,43 @@
             <td>{{ bug[3] }}</td> <!-- Steps -->
             <td>{{ bug[4] }}</td> <!-- Expected -->
             <td>{{ bug[5] }}</td> <!-- Actual -->
+            <td>
+        {% if bug[8] %}
+        <!-- Миниатюра -->
+        <img src="{{ url_for('attachment', bug_id=bug[0]) }}" class="thumbnail" onclick="openModal(this)" style="width:50px; height:auto; cursor:pointer;">
+        {% endif %}
+        </td>
         </tr>
         {% endfor %}
     </table>
+    <!-- Модальное окно -->
+    <div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImg">
+    <div id="caption"></div>
+    </div>
+    <script>
+function openModal(img) {
+  var modal = document.getElementById("myModal");
+  var modalImg = document.getElementById("modalImg");
+  var caption = document.getElementById("caption");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+  caption.innerHTML = img.alt || "";
+}
+
+function closeModal() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
+
+// Закрытие по клику вне картинки
+window.onclick = function(event) {
+  var modal = document.getElementById("myModal");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 </body>
 </html>

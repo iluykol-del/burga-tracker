@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Edit Bug #{{ bug[0] }}</h2>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <input type="text" name="title" value="{{ bug[1] }}" required><br>
         <textarea name="description" required>{{ bug[2] }}</textarea><br>
         <textarea name="steps">{{ bug[3] }}</textarea><br>
@@ -23,6 +23,10 @@
             <option {% if bug[7] == 'Medium' %}selected{% endif %}>Medium</option>
             <option {% if bug[7] == 'Low' %}selected{% endif %}>Low</option>
         </select>
+        {% if bug[8] %}
+        <p>Current attachment: <a href="{{ url_for('attachment', bug_id=bug[0]) }}" target="_blank">View</a></p>
+        {% endif %}
+        <input type="file" name="attachment"><br>
         <button type="submit">Save Changes</button>
     </form>
     <p><a href="{{ url_for('dashboard') }}">← Back to Dashboard</a></p>

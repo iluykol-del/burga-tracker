@@ -1,127 +1,149 @@
-🌍 Language: [English](#-burga-tracker) | [Русский](#-burga-tracker-ru)
+🐞 Bug Tracker (Flask + SQLite)
 
-# 🐞 Burga Tracker
+Простой веб-трекер багов на Flask с возможностью:
+добавлять баги
+фильтровать и сортировать их
+прикреплять изображения (скриншоты)
+просматривать изображения в модальном окне
+экспортировать отчёт в HTML (с таблицей и диаграммой)
+редактировать и удалять баги
+Проект предназначен для учебных целей и небольших локальных проектов.
 
-Web application for creating bug reports with automatic HTML reports and visual statistics.
+🚀 Возможности
 
-## 📌 Features
-- Create bug reports via web form
-- Store bug reports in SQLite database
-- Generate HTML report for each bug
-- View all bugs in dashboard table
-- Filter by severity and priority
-- Statistics and charts
-- Automated tests (pytest)
+✅ Добавление багов с полями:
 
-## 🛠 Technologies
-- Python 3.10+
-- Flask
-- SQLite
-- HTML, CSS, Bootstrap
-- Pytest
+Title
+Description
+Steps
+Expected result
+Actual result
+Severity (Critical / Major / Minor)
+Priority (High / Medium / Low)
+Attachment (изображение)
 
-## 🚀 Run project
+✅ Dashboard:
 
-```bash
-pip install -r requirements.txt
-python app.py
+сортировка по ID, Title, Severity, Priority
+фильтрация по Severity и Priority
+просмотр изображений в popup (modal window)
+кнопки Edit / Delete
 
-Open in browser:
-http://127.0.0.1:5000
+✅ Экспорт в HTML:
 
-📁 Project structure
+таблица всех багов
+встроенные изображения (base64)
+диаграмма распределения Severity
+статистика по количеству багов
 
-(see project folders)
+🛠️ Стек технологий
 
-🧪 Testing
-pytest
-📄 Documentation
-
-Test Plan
-
-Checklist
-
-Test Cases
-
-Bug Reports
-
-📷 Screenshots
-
-(coming soon)
-
-🐞 Burga Tracker (RU)
-
-Веб-приложение для создания баг-репортов с автоматической генерацией HTML-отчётов и визуальной статистикой.
-
-📌 Возможности
-
-Создание баг-репортов через веб-форму
-
-Хранение баг-репортов в базе данных SQLite
-
-Генерация HTML-отчёта для каждого бага
-
-Просмотр всех багов в виде таблицы (dashboard)
-
-Фильтрация по Severity и Priority
-
-Статистика и графики
-
-Автоматизированные тесты (pytest)
-
-🛠 Технологии
-
-Python 3.10+
-
+Python 3.x
 Flask
-
 SQLite
+HTML + CSS
+JavaScript (modal popup)
+Matplotlib (диаграмма)
 
-HTML, CSS, Bootstrap
+📂 Структура проекта
+burga-tracker/
+│
+├── app.py
+├── bugs.db
+├── templates/
+│   ├── home.html
+│   ├── dashboard.html
+│   ├── edit.html
+│
+├── static/
+│   ├── style.css
+│
+└── README.md
 
-Pytest
-
-🚀 Запуск проекта
-pip install -r requirements.txt
+⚙️ Установка и запуск
+1️⃣ Клонировать проект
+git clone <repo_url>
+cd burga-tracker
+2️⃣ Установить зависимости
+pip install flask matplotlib
+3️⃣ Запустить сервер
 python app.py
-
-Открыть в браузере:
+4️⃣ Открыть в браузере
 http://127.0.0.1:5000
+🗄️ База данных
 
-📁 Структура проекта
+Используется SQLite (bugs.db).
 
-(см. папки проекта)
+Таблица bugs:
 
-🧪 Тестирование
-pytest
-📄 Документация
+Поле	Тип
+id	INTEGER
+title	TEXT
+description	TEXT
+steps	TEXT
+expected	TEXT
+actual	TEXT
+severity	TEXT
+priority	TEXT
+attachment	BLOB
 
-Test Plan
+Изображения сохраняются прямо в БД в формате BLOB.
 
-Checklist
+🖼️ Работа с изображениями
 
-Test Cases
+изображения сохраняются в БД
+отображаются в таблице как миниатюры
+по клику открываются в модальном окне
+при экспорте в HTML встраиваются как base64
 
-Bug Reports
+📤 Экспорт отчёта
 
-📷 Скриншоты
+Кнопка Export HTML генерирует файл:
+bug_report.html
 
-(будут добавлены позже)
+В файле:
+диаграмма Severity Distribution
+статистика по багам
+таблица со всеми багами
+изображения вложены внутрь HTML
+
+🧩 Основные маршруты
+Route	Описание
+/форма добавления бага
+/submit	сохранение бага
+/dashboard	список багов
+/edit/<id>	редактирование
+/delete/<id>	удаление
+/attachment/<id>	получение изображения
+/export	экспорт HTML
+/clear	очистка БД
+
+🎨 UI особенности
+
+таблица с сортировкой
+фильтры по Severity и Priority
+modal popup для просмотра картинки
+кастомный CSS
+
+⚠️ Ограничения
+
+проект не предназначен для production
+используется Flask dev server
+нет авторизации
+нет ограничений размера файла
+нет защиты от XSS/SQL injection (учебный проект)
+
+📌 Планы по улучшению (TODO)
+
+улучшение дизайна
+тёмная тема
 
 
----
+👨‍💻 Автор
 
-## 💡 Что я исправил
-- ✔ закрыл все ```bash``` блоки  
-- ✔ убрал служебные фразы про коммиты  
-- ✔ сделал нормальные заголовки  
-- ✔ сделал рабочие якоря для Language  
-- ✔ README теперь красиво рендерится на GitHub  
-
----
-
-## 💾 После вставки — коммит
-
-Сообщение:
-```text
-Make README bilingual (EN/RU)
+Проект создан в учебных целях как pet-project для изучения:
+Flask
+SQLite
+HTML/CSS
+работы с изображениями
+генерации HTML-отчётов

@@ -9,7 +9,7 @@
     <div class="container">
         <h2>Create Bug Report</h2>
 
-        <form method="post" action="/submit">
+        <form method="post" action="/submit" enctype="multipart/form-data">
             <input type="text" name="title" placeholder="Title" required>
 
             <textarea name="description" placeholder="Description" required></textarea>
@@ -35,6 +35,8 @@
             <input type="text" name="environment" placeholder="OS, Browser, Device">
             <input type="text" name="app_version" placeholder="Application version">
             <input type="text" name="author" placeholder="Author">
+            <label for="attachment">Attachment:</label>
+            <input type="file" name="attachment" accept="image/*">
 
             <button type="submit">Create Bug Report</button>
             <a href="{{ url_for('dashboard') }}" class="button">Go to Dashboard</a>
